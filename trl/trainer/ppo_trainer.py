@@ -23,7 +23,6 @@ import torch
 from accelerate import Accelerator
 from accelerate.utils import ProjectConfiguration
 from datasets import Dataset
-from huggingface_hub import whoami
 from packaging import version
 from requests.exceptions import HTTPError
 from torch.optim import Adam
@@ -1247,13 +1246,13 @@ class PPOTrainer(BaseTrainer):
             path (`str`): The path to save the model card to.
             model_name (`str`, *optional*): The name of the model, defaults to `TRL Model`.
         """
-        try:
-            user = whoami()["name"]
-        # handle the offline case
-        except HTTPError:
-            warnings.warn("Cannot retrieve user information assuming you are running in offline mode.")
-            return
-
+        # try:
+        #     user = whoami()["name"]
+        # # handle the offline case
+        # except HTTPError:
+        #     warnings.warn("Cannot retrieve user information assuming you are running in offline mode.")
+        #     return
+        user = "."
         if not os.path.exists(path):
             os.makedirs(path)
 
